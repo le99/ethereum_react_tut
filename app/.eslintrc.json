@@ -1,0 +1,23 @@
+{
+  "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+  ],
+  "rules": {
+    "no-unused-vars": 1,
+    "no-console": 1,
+    "indent": ["error", 2]
+  },
+  "env": {
+    "es2017": true,
+    "node": true,
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
+}
