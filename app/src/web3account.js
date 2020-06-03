@@ -24,13 +24,15 @@ async function init(){
   }
   // Non-dapp browsers...
   else {
-    web3 = new Web3(new web3.providers.HttpProvider('http://127.0.0.1:8545'));
+    throw new Error('No web3 provider');
   }
   window.web3 = web3;
 }
 
-export default init().then(async ()=>{
-  let account = (await web3.eth.getAccounts())[0];
+let account = null;
+
+init().then(async ()=>{
+  account = (await web3.eth.getAccounts())[0];
 
   setInterval(async function() {
     let a = (await web3.eth.getAccounts())[0];
@@ -39,4 +41,15 @@ export default init().then(async ()=>{
       console.log('Account Changed', account);
     }
   }, 1000);
+
+  return account;
 });
+
+export default async function () {
+  if(account){
+    return Promise.resolve(account);
+  }
+  return init().then(async ()=>{
+    return (await web3.eth.getAccounts())[0];
+  });
+}

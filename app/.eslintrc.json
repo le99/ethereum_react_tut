@@ -9,15 +9,16 @@
     "indent": ["error", 2]
   },
   "env": {
-    "es2017": true,
     "node": true,
-    "browser": true
+    "browser": true,
+    "es2017": true
   },
   "parserOptions": {
     "ecmaVersion": 8,
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true
+      "jsx": true,
+      "modules": true
     }
   }
 }
