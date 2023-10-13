@@ -42,3 +42,6 @@ c.sendCoin(accounts[1], 10, {from: accounts[0]})
 
 ##Based on Metacoin from Truffle:
 https://www.trufflesuite.com/docs/truffle/quickstart
+
+
+https://docs.metamask.io/
