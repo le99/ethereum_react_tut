@@ -22,6 +22,7 @@ docker run --rm --publish 7545:8545 trufflesuite/ganache-cli:v6.12.2
 
 Compilar Smart Contracts y desplegarlos a Ganache
 ```bash
+truffle network --clean
 truffle compile
 truffle migrate
 ```
@@ -55,10 +56,6 @@ TX doesn't have the correct nonce - Metamask
 .../settings/advanced
 Clear activity and nonce data
 
-
-```bash
-truffle network --clean
-```
 
 
 # Referencias
