@@ -3,9 +3,6 @@
 ## Requisitos
 * [Node.js v14-v18](https://nodejs.org/en/download)
 * [Metamask](https://metamask.io/download/)
-* [Ganache](https://trufflesuite.com/docs/ganache/quickstart/)
-
-
 * [Docker](https://docs.docker.com/engine/install/)
 
 
@@ -14,40 +11,42 @@
 npm install -g truffle@v5.11.5
 ```
 
+## Correr aplicacion
 
-## Compilar Smart Contracts
+Correr Ganache con docker
 
+```bash
+docker run --rm --publish 7545:8545 trufflesuite/ganache-cli:v6.12.2
+```
+
+
+Compilar Smart Contracts y desplegarlos a Ganache
 ```bash
 truffle compile
 truffle migrate
 ```
 
-
-# Run truffle development
-
-
-https://www.trufflesuite.com/docs/truffle/getting-started/installation
-npm install -g truffle
-
+Correr aplicacion React
 ```bash
-truffle develop
-migrate
+npm install
+
+# Copiar 
+# ./build/contracts/MetaCoin.json
+# a
+# ./src/MetaCoin.json
+
+# Es posible que en ./src/App.js
+# se deba asignar metaCoinAddress manualmente.
+
+npm start
+#localhost:3000
 ```
 
-let c = await MetaCoin.deployed()
-
-
-c = await MetaCoin.at("0x507E67759cFA35c647C4dAD5DC3cA8aD09FB82E4")
-c.sendCoin(accounts[1], 10, {from: accounts[0]})
-
-##Based on Metacoin from Truffle:
-https://www.trufflesuite.com/docs/truffle/quickstart
-
-
-https://docs.metamask.io/
-
-https://docs.ethers.org/v6/
-
+Al usar metamask configurar para que se conecte a Ganash
+Select a network/add network/Add a netwrok manually.
+New RPC URL: http://0.0.0.0:7545
+Chain ID: 1337
+Currency symbol: ETH
 
 ## Errores posibles
 
@@ -55,3 +54,18 @@ TX doesn't have the correct nonce - Metamask
 
 .../settings/advanced
 Clear activity and nonce data
+
+
+```bash
+truffle network --clean
+```
+
+
+# Referencias
+
+https://www.trufflesuite.com/docs/truffle/quickstart
+
+https://docs.metamask.io/
+
+https://docs.ethers.org/v6/
+

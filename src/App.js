@@ -2,6 +2,8 @@ import {useState} from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
 const { ethers, Contract } = require("ethers");
 let metaCoin = require('./MetaCoin.json');
+
+//metacoinAddress se puede asignar manualmente
 const metaCoinAddress = metaCoin.networks[Object.keys(metaCoin.networks)[0]].address;
 
 
@@ -20,12 +22,16 @@ async function ethersConnect(){
     throw new Error('Please install MetaMask!');
   }
 
+
+  await window.ethereum.request({ method: 'eth_requestAccounts' });
+
   provider = new ethers.BrowserProvider(window.ethereum)
   const signer = await provider.getSigner();
 
   contract = new Contract(metaCoinAddress, metaCoin.abi, signer);
 
   metamaskAccount = signer.address;
+  console.log('metamaskAccount:' + metamaskAccount);
 
   function handleAccountsChanged(accountsNew){
     if (accountsNew.length === 0) {
@@ -47,6 +53,8 @@ function App() {
   const [balance, setBalance] = useState('');
 
   async function getBalance(){
+    console.log('metamaskAccount:' + metamaskAccount);
+
     const newBalance = await contract.getBalance(metamaskAccount);
     setBalance(newBalance+ '');
   }
