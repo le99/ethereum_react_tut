@@ -1,32 +1,69 @@
+import {useState} from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
+const { ethers, Contract } = require("ethers");
+let metaCoin = require('./MetaCoin.json');
+const metaCoinAddress = metaCoin.networks[Object.keys(metaCoin.networks)[0]].address;
 
 
-async function detectProvider(){
-  const provider = await detectEthereumProvider();
-  if (provider) {
-    if (provider !== window.ethereum) {
+let provider = null;
+let contract = null;
+let metamaskAccount;
+
+
+async function ethersConnect(){
+  const provider0 = await detectEthereumProvider();
+  if (provider0) {
+    if (provider0 !== window.ethereum) {
       throw new Error('Do you have multiple wallets installed?');
     }
-
-    const s = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    console.log(s);
-    return;
   } else {
     throw new Error('Please install MetaMask!');
   }
+
+  provider = new ethers.BrowserProvider(window.ethereum)
+  const signer = await provider.getSigner();
+
+  contract = new Contract(metaCoinAddress, metaCoin.abi, signer);
+
+  metamaskAccount = signer.address;
+
+  function handleAccountsChanged(accountsNew){
+    if (accountsNew.length === 0) {
+      metamaskAccount = null;
+    }
+    metamaskAccount = accountsNew[0];
+  }
+
+  window.ethereum && window.ethereum.on('accountsChanged', handleAccountsChanged);
 }
 
-detectProvider();
 
-let metaCoinJSON = require('./MetaCoin.json');
-// console.log(metaCoinJSON);
-
+ethersConnect();
 
 
 function App() {
+  const [addressSend, setAddressSend] = useState('');
+
+  const [balance, setBalance] = useState('');
+
+  async function getBalance(){
+    const newBalance = await contract.getBalance(metamaskAccount);
+    setBalance(newBalance+ '');
+  }
+
+  async function sendCoin(){
+    await contract.sendCoin(addressSend, 1);
+  }
+
   return (
     <div>
-      <p>Hello</p>
+      <p>Address to send to:</p>
+      <input type="text" value={addressSend} onChange={(e) => setAddressSend(e.target.value)}></input>
+      <button onClick={sendCoin}>sendCoin</button>
+
+      <hr />
+      <button onClick={getBalance}>getBalance</button>
+      <p>{balance}</p>
     </div>
   );
 }

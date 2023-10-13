@@ -45,3 +45,13 @@ https://www.trufflesuite.com/docs/truffle/quickstart
 
 
 https://docs.metamask.io/
+
+https://docs.ethers.org/v6/
+
+
+## Errores posibles
+
+TX doesn't have the correct nonce - Metamask
+
+.../settings/advanced
+Clear activity and nonce data
