@@ -1,7 +1,7 @@
 # Aplicacion de ejemplo de una aplicacion de Ethereum
 
 ## Requisitos
-* [Node.js v14-v18](https://nodejs.org/en/download)
+* [Node.js v14-v18.18](https://nodejs.org/en/download)
 * [Metamask](https://metamask.io/download/)
 * [Docker](https://docs.docker.com/engine/install/)
 
@@ -45,7 +45,7 @@ npm start
 
 Al usar metamask configurar para que se conecte a Ganash
 Select a network/add network/Add a netwrok manually.
-New RPC URL: http://0.0.0.0:7545
+New RPC URL: http://localhost:7545
 Chain ID: 1337
 Currency symbol: ETH
 
