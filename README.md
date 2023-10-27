@@ -60,11 +60,11 @@ Clear activity and nonce data
 ## Correr con red de pruebas Sepolia
 
 Se necesita solicitar Ether de un Faucet (https://ethereum.org/en/developers/docs/networks/) como:
-`https://www.infura.io/faucet/sepolia`.
+https://www.infura.io/faucet/sepolia.
 
 Cuando se tenga Ether luego:
 
-Ir a `https://remix.ethereum.org` poner codigo del smart contract en el editor y compilar.
+Ir a https://remix.ethereum.org poner codigo del smart contract en el editor y compilar.
 En la izquierda `solidity compiler` presionar copy ABI to clipboard.
 Pegar contenido en ./src/MetaCoin.json.
 En la izquierda `deploy y run transactions` en Environment poner `Injected Provider Metamask`, seleccionar Sepolia Network. Seleccionar Deploy.
